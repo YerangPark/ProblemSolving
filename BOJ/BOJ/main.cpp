@@ -1,30 +1,27 @@
 #include <iostream>
-
+#include <string>
+using namespace std;
 #include <cstdio>   //putchar() 에스터42, 공백 32, 개행 10
-#include<cmath>     //abs()
+#include <cmath>     //abs()
 
-int n, i, j, t;
+int n, minY=1989, maxY=2011, minM, maxM, minD, maxD, d,m,y,i;
+string minN, maxN, Na;
+
 int main(void){
-    for(i=scanf("%d",&n);i<=n*2-1;i++){
-        if(i<=n){
-            for(j=1;j<i;j++){
-                putchar(32);
-            }
-            for(j=0;j<=n*2-i*2;j++){
-                putchar(42);
-            }
+    for(i=scanf("%d",&n);i<=n;i++){
+        cin>>Na>>d>>m>>y;
+        if(y<maxY||(y==maxY&&maxM>m)||(y==maxY&&maxM==m&&maxD>d)){
+            maxY=y;
+            maxN.assign(Na);
+            maxM=m;
         }
-        else{
-            t=i-n;
-            for(j=n-t;j>1;j--){
-                putchar(32);
-            }
-            for(j=0;j<2*t+1;j++){
-                putchar(42);
-            }
+        if(y>minY||(y==minY&&minM<m)||(y==minY&&minM>m&&maxD<d)){
+            minY=y;
+            minN.assign(Na);
+            minM=m;
         }
-        putchar(10);
     }
+    cout << minN <<'\n'<<maxN;
 }
-/* 숏코딩
+/*
  */
