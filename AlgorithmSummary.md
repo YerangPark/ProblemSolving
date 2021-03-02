@@ -4,9 +4,8 @@
 
 [안경잡이개발자 : 네이버 블로그](https://blog.naver.com/ndb796/221226794899)
 - - - -
-#### <details><summary>🪄 목차</summary>
+<details><summary>🪄 목차</summary>
 <p>
-	
 1. 선택 정렬
 2. 버블 정렬
 3. 삽입 정렬
