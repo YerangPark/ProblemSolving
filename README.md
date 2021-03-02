@@ -11,7 +11,7 @@
 ___
 ## 알고리즘
 
-#### 📝 노트 정리 : [AlgorithmSummary.md](https://github.com/yerang2zzang/CodingTest/AlgorithmSummary.md)
+#### 📝 노트 정리 : [AlgorithmSummary.md](https://github.com/yerang2zzang/CodingTest/blob/main/AlgorithmSummary.md)
 <details><summary>🪄 공부 순서</summary>
 <p>
 
