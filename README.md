@@ -13,7 +13,7 @@ ___
 
 #### 📝 노트 정리 : [AlgorithmSummary.md](https://github.com/yerang2zzang/CodingTest/blob/main/AlgorithmSummary.md)
 <details><summary>🪄 공부 순서</summary>
-<p>
+<pre>
 
  - [x] 선택 정렬
  - [x] 버블 정렬
@@ -53,7 +53,7 @@ ___
  - [ ] 깃허브로 알고리즘 정답 소스코드 관리하기
  - [ ] 인덱스 트리
  - [ ] 비트 마스크
-</p>
+</pre>
 </details>
 
 ##### 참고자료 : [동빈나의 2018 알고리즘](https://blog.naver.com/ndb796)
