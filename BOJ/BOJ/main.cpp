@@ -1,34 +1,26 @@
 #include <iostream>
+#include <string>
 #include <algorithm>
-#include <utility> //pair
 #include <vector>
+#include <utility> //pair
+//#include<bits/stdc++.h>
+//#define INT_MAX 2147483647
 
 using namespace std;
 
 
+/*
+ 영어 알파벳을 13글자씩 밀어서 암호를 생성한다.
+ 대문자는 대문자로 밀어야 하고, 소문자는 소문자로 밀기!
+ */
+
 bool compare(int a, int b) {return a>b;}
-int n,m,i,j,cnt=0,p,s,z;
-int main(void) {
-    vector<int> v;
+int n,m,i,j,sum=0,cnt=0;
+int main(void){
     scanf("%d",&n);
-    for(i=0;i<n;i++){
-        v.clear();
-        cnt=0;
-        scanf("%d %d",&p,&s); //참가자 수, 자리 수
-        for(j=0;j<p;j++){
-            scanf("%d",&m);
-            for(auto z:v) {
-                if(z==m){
-                    cnt++;
-                    goto label;
-                }
-            }
-            v.push_back(m);
-        label:
-            printf("");
-        }
-        printf("%d\n",cnt);
-    }
+    if(n%2==0) printf("YES");
+    else printf("NO");
     return 0;
+    
 }
-//
+
