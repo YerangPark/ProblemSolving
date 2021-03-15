@@ -1,19 +1,7 @@
 #include <iostream>
-#include <cstring> //memset
 #include <algorithm>
-#include <string>
 #include <vector>
-#include <queue>
-#include <utility> //pair
-//#include<bits/stdc++.h>
-
-//#define INT_MAX 2147483647
-//bool compare(int a, int b) {return a>b;}
-//memset(dp, -1, sizeof(dp));
-
-//int n,m,i,j,sum=0,cnt=0,a, b,ran;
 using namespace std;
-
 bool compare(pair<int, int> a, pair<int, int> b) {
     if(a.second==b.second) return a.first < b.first;
     return a.second<b.second;
@@ -27,7 +15,6 @@ int main(void){
         v.push_back(make_pair(st,en));
     }
     sort(v.begin(),v.end(),compare);
-
     en=v[0].second;
     for(i=1;i<n;i++){
         if(en<=v[i].first){
@@ -38,11 +25,3 @@ int main(void){
     }
     printf("%d",cnt);
 }
-
-/*
- 1개의 회의실을 이용하려는 N팀.
- 각 회의에 대해 시작/끝 시간 주어짐.
- 겹치지 않게 하면서 회의실 사용하는 회의 최대 개수 찾기.
- 
- (1,4), (5,7), (8,11), (12,14)
- */
