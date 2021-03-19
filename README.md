@@ -32,12 +32,12 @@ ___
  - [x] 크루스칼 알고리즘(Kruskal Algorithm)
  - [x] 이진 트리의 구현 및 순회(Traversal)
  - [x] 다이나믹 프로그래밍(Dynamic Programming)
- - [ ] 에라토스테네스의 체
- - [ ] 플로이드 와샬(Floyd Warshall) 알고리즘
- - [ ] 위상 정렬(Topology Sort)
- - [ ] 강한 결합 요소
- - [ ] 네트워크 플로우
- - [ ] 위상 정렬 기초 문제풀이
+ - [x] 에라토스테네스의 체
+ - [x] 플로이드 와샬(Floyd Warshall) 알고리즘
+ - [x] 위상 정렬(Topology Sort)
+ - [x] 강한 결합 요소
+ - [x] 네트워크 플로우
+ - [x] 위상 정렬 기초 문제풀이
  - [ ] 이분 매칭(Pipartite Matching)
  - [ ] KMP(Knuth-Morris-Pratt) 알고리즘
  - [ ] 라빈 카프 알고리즘
