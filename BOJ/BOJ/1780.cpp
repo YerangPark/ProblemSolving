@@ -1,31 +1,13 @@
 #include <iostream>
-#include <cstring> //memset
-#include <algorithm>
-#include <string>
-#include <vector>
-#include <queue>
-#include <set>
-#include <map>
-//#include<bits/stdc++.h>
-
-//#define INT_MAX 2147483647
-//bool compare(int a, int b) {return a>b;}
-//memset(dp, -1, sizeof(dp));
-
-//int n,m,i,j,sum=0,cnt=0,a, b,ran;
-
 using namespace std;
-
 int arr[2187][2187];
 int i, j, n,cnt[3];
-
 void recursion(int startX, int endX, int startY, int endY){
     //base case
     if(startX==endX&&startY==endY) {
         cnt[arr[startY][startX]+1]++;
         return;
     }
-    
     //recursion
    bool isChange=false;
    int tmp=arr[startY][startX];
@@ -55,7 +37,6 @@ void recursion(int startX, int endX, int startY, int endY){
    }
    return;
 }
-
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
@@ -71,6 +52,4 @@ int main() {
     
     for(auto p:cnt)cout<<p<<'\n';
 }
-/*
- 
- */
+
