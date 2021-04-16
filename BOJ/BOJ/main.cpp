@@ -15,46 +15,58 @@
 //int n,m,i,j,sum=0,cnt=0,a, b,ran;
 
 using namespace std;
-//답은 ans, 함수는 solve, 부울은 flag, start/endXY대신에 start만 받고 사이즈 받기 방법
-int n, m, arr[20][20], ans=1e9, c[20];
+//부울은 flag, start/endXY대신에 start만 받고 사이즈 받기 방법
 
-void solve(int cnt, int idx){
-    if(idx==n) return;
-    if(cnt==n/2){
-        int s1=0, s2=0;
-        for(int i=0;i<n;i++){
-            for(int j=0;j<n;j++){
-                if(c[i]&&c[j]) s1+=arr[i][j];
-                if(!c[i]&&!c[j]) s2+=arr[i][j];
-            }
-        }
-        ans=min(ans,abs(s1-s2));
-        return;
-    }
-    c[idx]=true;
-    solve(cnt+1,idx+1);
-    c[idx]=false;
-    solve(cnt,idx+1);
+int n, m, d[10001],maxx=0;
+vector<int> vv;
+
+void solve(vector<int> anv, int len){
+    //base case
+    
+    
+    //recursive case
+    
 }
+void checkLen(vector<int> v){
+    int status=0;
+    int len=v.size();
+    for(int j=0;j<len;j++){
+        if(v[j]<v[j+1]&&status==0)status=1;
+        else if(v[j]>v[j+1]&&status==0)status=2;
+        else if(v[j]>v[j+1]&&status==1)status=3;
+        else if((v[j]<v[j+1]&&(status==2||status==3))||v[j]==v[j+1]){
+            status=4;
+            break;
+        }
+    }
+    if(status!=4&&maxx<len)maxx=len;
+}
+/*
+ int status=0;
+ for(int j=i;j<len+i-1;j++){
+     if(v[j]<v[j+1]&&status==0)status=1;
+     else if(v[j]>v[j+1]&&status==0)status=2;
+     else if(v[j]>v[j+1]&&status==1)status=3;
+     else if((v[j]<v[j+1]&&(status==2||status==3))||v[j]==v[j+1]){
+         status=4;
+         break;
+     }
+ }
+ if(status!=4&&maxx<len)maxx=len;
+ */
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     cin>>n;
     for(int i=0;i<n;i++){
-        for(int j=0;j<n;j++){
-            cin>>arr[i][j];
-        }
+        cin>>m;
+        vv.push_back(m);
     }
-    solve(0,0);
-    cout<<ans;
-    return 0;
+    solve(n);
+    cout<<maxx;
 }
 
 /*
- N개의 수로 이루어진 수열과 N-1개의 연산자.
- 입력 >> 항 개수
-        항1 항2 항3...
-        덧 뺄 곱 나
  
  */
