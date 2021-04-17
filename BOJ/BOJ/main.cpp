@@ -11,62 +11,32 @@
 //#define INT_MAX 2147483647
 //bool compare(int a, int b) {return a>b;}
 //memset(dp, -1, sizeof(dp));
-
-//int n,m,i,j,sum=0,cnt=0,a, b,ran;
-
-using namespace std;
 //부울은 flag, start/endXY대신에 start만 받고 사이즈 받기 방법
 
-int n, m, d[10001],maxx=0;
-vector<int> vv;
+using namespace std;
 
-void solve(vector<int> anv, int len){
-    //base case
-    
-    
-    //recursive case
-    
+int n, m, i, j, in[3], dp[101][101][101];
+
+int w(int a, int b, int c){
+    int x=a+50, y=b+50, z=c+50;
+    if(dp[x][y][z]) return dp[x][y][z];
+    if(a<=0||b<=0||c<=0)
+        return 1;
+    else if(a>20||b>20||c>20)
+        return dp[x][y][z]=w(20,20,20);
+    else if(a<b && b<c)
+        return dp[x][y][z]=w(a,b,c-1)+w(a,b-1,c-1)-w(a,b-1,c);
+    else
+        return dp[x][y][z]=w(a-1,b,c)+w(a-1,b-1,c)+w(a-1,b,c-1)-w(a-1,b-1,c-1);
 }
-void checkLen(vector<int> v){
-    int status=0;
-    int len=v.size();
-    for(int j=0;j<len;j++){
-        if(v[j]<v[j+1]&&status==0)status=1;
-        else if(v[j]>v[j+1]&&status==0)status=2;
-        else if(v[j]>v[j+1]&&status==1)status=3;
-        else if((v[j]<v[j+1]&&(status==2||status==3))||v[j]==v[j+1]){
-            status=4;
-            break;
-        }
-    }
-    if(status!=4&&maxx<len)maxx=len;
-}
-/*
- int status=0;
- for(int j=i;j<len+i-1;j++){
-     if(v[j]<v[j+1]&&status==0)status=1;
-     else if(v[j]>v[j+1]&&status==0)status=2;
-     else if(v[j]>v[j+1]&&status==1)status=3;
-     else if((v[j]<v[j+1]&&(status==2||status==3))||v[j]==v[j+1]){
-         status=4;
-         break;
-     }
- }
- if(status!=4&&maxx<len)maxx=len;
- */
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
-    cin>>n;
-    for(int i=0;i<n;i++){
-        cin>>m;
-        vv.push_back(m);
+    cin>>in[0]>>in[1]>>in[2];
+    while(in[0]!=-1&&in[1]!=-1&&in[2]!=-1){
+        w(in[0],in[1],in[2]);
+        cin>>in[0]>>in[1]>>in[2];
     }
-    solve(n);
-    cout<<maxx;
+    return 0;
 }
-
-/*
- 
- */
