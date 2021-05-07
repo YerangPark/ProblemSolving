@@ -60,10 +60,15 @@ ___
 
 ___
 
+## CodeUp
+
+#### 🆔 : [yrpark](https://codeup.kr/userinfo.php?user=yrpark)
+
+___
+
 ## BOJ
 
 #### 🆔 : [dpfdkvkr](https://www.acmicpc.net/user/dpfkdvkr), [solved.ac](https://solved.ac/profile/dpfkdvkr)
-
 
 ___
 
