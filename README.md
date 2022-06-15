@@ -69,7 +69,8 @@ ___
 ## BOJ
 
 #### 🆔 : [dpfdkvkr](https://www.acmicpc.net/user/dpfkdvkr), [solved.ac](https://solved.ac/profile/dpfkdvkr)
-<p>![mazandi profile](http://mazandi.herokuapp.com/api?handle={dpfkdvkr}&theme=warm)</p>
+![mazandi profile](http://mazandi.herokuapp.com/api?handle={dpfkdvkr}&theme=warm)
+
 ___
 
 ## CodeForces
