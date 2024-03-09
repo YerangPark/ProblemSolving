@@ -188,10 +188,10 @@ void quickSort(int *data, int start, int end){
     int key=start;  //key는 첫 번째 원소.
     int i=start+1;  //순방향으로 key보다 큰 값 찾기.
     int j=end;      //역방향으로 key보다 작은 값 찾기.
-    
+
     while(i<=j){    //탐색하다가 i와 j가 엇갈릴 때 까지 반복.
         //내림차순으로 변경하고 싶을 때는 아래 와일문의 부등호를 반대로 바꿔주면 됨.
-        
+
         //키 값보다 큰 값을 만날 때까지 오른쪽으로 이동.
         while(data[i]<=data[key]){
             i++;
@@ -200,7 +200,7 @@ void quickSort(int *data, int start, int end){
         while(data[j]>=data[key] && j>start){
             j--;
         }
-        
+
         //엇갈린 상태이면 j와 키 값 교체.
         if(i>j){
             temp=data[j];
@@ -256,19 +256,19 @@ int a[10]={9,3,5,4,1,10,8,6,7,2};
 sort(a, a+10, compare);
 ```
 
-> 실무에서는 클래스 형태를 이용한다.  
-> 하지만 코테에서는 클래스를 이용하면 비효율적이라서 `pair` 라이브러리를 사용함.  
+> 실무에서는 클래스 형태를 이용한다.
+> 하지만 코테에서는 클래스를 이용하면 비효율적이라서 `pair` 라이브러리를 사용함.
 
 ## pair
 * `pair`는 `iostream`, `vector`, `algorithm` 라이브러리 포함해야 함.
-* 벡터 STL은 마치 배열과 같이 작동하는데 원소를 선택적으로 삽입, 삭제할 수 있음! 배열을 보다 사용하기 쉽게 개편한 자료구조라고 할 수 있다. 
+* 벡터 STL은 마치 배열과 같이 작동하는데 원소를 선택적으로 삽입, 삭제할 수 있음! 배열을 보다 사용하기 쉽게 개편한 자료구조라고 할 수 있다.
 ```cpp
 int main(){
     vector<pair<int, string>> v;
     v. push_back(pair<int, string>(90, "박예랑"));
     v. push_back(pair<int, string>(100, "박예롱"));
     v. push_back(pair<int, string>(99, "박예똥"));
-    
+
     sort(v.begin(), v.end());
     for(int i=0;i<v.size();i++){
         cout<<v[i].second<<' ';
@@ -304,9 +304,9 @@ int main() {
     v.push_back(pair<string,pair<int, int>>("이태일",make_pair(87,19660216)));
     v.push_back(pair<string,pair<int, int>>("김상욱",make_pair(80,19771223)));
     v.push_back(pair<string,pair<int, int>>("강종구",make_pair(82,19550712)));
-    
+
     sort(v.begin(), v.end(), compare);
-    
+
     for(int i=0;i<v.size();i++){
         cout<<v[i].first<<' ';
     }
@@ -400,7 +400,7 @@ int main(void) {
         } while (c != 0);
         //부모노드까지 최대 힙이 될 때까지 반복. 부모노드가 최댓값이 되면 종료.
     }
-    
+
     // 크기를 줄여가며 반복적으로 힙을 구성
     // i값이 감소하면서 배열 끝에서부터 차례대로 큰 값으로 바뀜.
     for (int i = number - 1; i >= 0; i--) {
@@ -427,7 +427,7 @@ int main(void) {
             root = c;
         } while (c < i);
     }
-    
+
     // 결과 출력
     for(int i = 0; i < number; i++) {
         printf("%d ", heap[i]);
@@ -454,7 +454,7 @@ int main(){
         1,3,2,4,3,2,5,3,1,2,
         3,4,4,3,5,1,2,3,5,2,
         3,1,4,3,5,1,2,1,1,1};
-        
+
     for(int i=1;i<=5;i++){
         count[i]=0;
     }
@@ -468,7 +468,7 @@ int main(){
                 printf("%d\n", i);
             }
         }
-        
+
     }
     return 0;
 }
@@ -551,7 +551,7 @@ void bfs(int start){
 - - - -
 ## 깊이 우선 탐색(DFS)
 - 깊은 것을 우선으로 하여 탐색.
-- 맹목적으로 각 노드를 전체적으로 탐색할 때 
+- 맹목적으로 각 노드를 전체적으로 탐색할 때
 ```cpp
 void dfs(int x){
     if(c[x]) return;
@@ -603,11 +603,11 @@ int main(void){
     unionParent(parent,5,6);
     unionParent(parent,6,7);
     unionParent(parent,7,8);
-    
+
     printf("1과 5는 연결되어 있나요? %d\n",findParent(parent,1,5));
     unionParent(parent,1,5);
     printf("1과 5는 연결되어 있나요? %d\n",findParent(parent,1,5));
-    
+
     printf("7과 9는 연결되어 있나요? %d\n",findParent(parent,7,9));
     unionParent(parent,8,9);
     printf("7과 9는 연결되어 있나요? %d\n",findParent(parent,7,9));
@@ -671,7 +671,7 @@ public:
 
 int main(void) {
     const int n = 7;
-    
+
     vector<Edge> v;
     v.push_back(Edge(1, 7, 12));
     v.push_back(Edge(1, 4, 28));
@@ -684,16 +684,16 @@ int main(void) {
     v.push_back(Edge(4, 7, 13));
     v.push_back(Edge(5, 6, 45));
     v.push_back(Edge(5, 7, 73));
-    
+
     // 간선의 비용으로 오름차순 정렬
     sort(v.begin(), v.end());
-    
+
     // 각 정점이 포함된 그래프가 어디인지 저장
     int set[n];
     for(int i = 0; i < n; i++) {
         set[i] = i;
     }
-    
+
     // 거리의 합을 0으로 초기화
     int sum = 0;
     for(int i = 0; i < v.size(); i++) {
@@ -703,7 +703,7 @@ int main(void) {
             unionParent(set, v[i].node[0] - 1, v[i].node[1] - 1);
         }
     }
-    
+
     printf("%d\n", sum);
 }
 ```
@@ -799,11 +799,11 @@ int main(void) {
     cout << "전위 : ";
     preorder(&nodes[1]);
     cout << '\n';
-    
+
     cout << "중위 : ";
     inorder(&nodes[1]);
     cout << '\n';
-    
+
     cout << "후위 : ";
     postorder(&nodes[1]);
     cout << '\n';
