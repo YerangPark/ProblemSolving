@@ -1,5 +1,4 @@
 /*
- 
 #ifndef bojHeader_h
 #define bojHeader_h
 
@@ -17,6 +16,6 @@ using namespace std;
 #define EN putchar(10)
 
 
-#endif /* bojHeader_h */
+#endif // bojHeader_h
 
 */

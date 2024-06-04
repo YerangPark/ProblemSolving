@@ -1,26 +1,41 @@
 #include <iostream>
-#include <algorithm>
+#include <queue>
 using namespace std;
-int dp[1000001];
 
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
 
-int main(void) {
-    int n;
-    scanf("%d",&n);
-    
-    for(int i=n;i>=1;i--){
-        if(i%3==0){
-            dp[i/3]= dp[i/3]? min(dp[i]+1,dp[i/3]):dp[i]+1;
+    int n, dp[1000000] = {-1,};
+
+    cin >> n;
+
+    queue<int> q;
+    q.push(n);
+    dp[n] = 0;
+
+    while (!q.empty()) {
+        int now = q.front();
+        q.pop();
+        int cnt = dp[now];
+        if (now == 1) {
+            cout << cnt << endl;
+            break;
         }
-        if(i%2==0){
-            
-            dp[i/2]= dp[i/2]? min(dp[i]+1,dp[i/2]):dp[i]+1;
+        if (!now) continue;
+        if (now % 3 == 0) {
+            q.push(now / 3);
+            if (dp[now/3] != -1) dp[now/3] = min(dp[now]+1, dp[now/3]);
+            else dp[now/3] = dp[now]+1;
         }
-        if(i-1>0){
-            dp[i-1]= dp[i-1]? min(dp[i]+1,dp[i-1]):dp[i]+1;
+        if (now % 2 == 0) {
+            q.push(now / 2);
+            dp[now/2] = min(dp[now]+1, dp[now/2]);
         }
-        
+        if (now - 1 > 0) {
+            q.push(now - 1);
+            dp[now-1] = min(dp[now]+1, dp[now-1]);
+        }
     }
-    printf("%d\n",dp[1]);
     return 0;
 }
