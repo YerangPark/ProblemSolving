@@ -8,9 +8,9 @@ int main() {
     cin.tie(NULL); cout.tie(NULL);
 
     int n;
-    vector<bool> ans;
     cin >> n;
     cin.ignore();
+
     while (n--) {
         vector<char> v;
         string str;
