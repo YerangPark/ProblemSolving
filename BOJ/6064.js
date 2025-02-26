@@ -1,27 +1,40 @@
 const fs = require("fs");
-const input = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
+const input = fs
+  .readFileSync("./dev/stdin")
+  .toString()
+  .trim()
+  .split("\n")
+  .map(Number);
+const T = input.splice(1);
+const answer = [];
 
-const T = Number(input[0]);
-for (let i = 1; i <= T; i++) {
-  const [M, N, x, y] = input[i].split(" ").map(Number);
-  let xx = 1,
-    yy = 1,
-    cnt = 1;
-  let res = -1;
-  while (1) {
-    if (x === xx && y === yy) {
-      res = cnt;
+T.forEach((v) => {
+  const [M, N, X, Y] = v.split(" ").map(Number);
+  const last = lcm(N, M);
+  let x = X;
+  let y = Y;
+  while (true) {
+    if (x > last || y > last) {
+      answer.push(-1);
+      break;
+    } else if (x > y) {
+      y += N;
+    } else if (x < y) {
+      x += M;
+    } else {
+      answer.push(x);
       break;
     }
-    if (xx === M && yy === N) {
-      break;
-    }
-
-    if (xx < M) xx++;
-    else xx = 1;
-    if (yy < N) yy++;
-    else yy = 1;
-    cnt++;
   }
-  console.log(res);
+});
+
+console.log(answer.join("\n"));
+
+function gcd(a, b) {
+  if (b == 0) return a;
+  return a > b ? gcd(b, a % b) : gcd(a, b % a);
+}
+
+function lcm(a, b) {
+  return (a * b) / gcd(a, b);
 }
