@@ -12,44 +12,82 @@ class MinHeap {
   }
 
   remove() {
-    if (this.heap.length > 0) {
-      return this.heap.shift();
-    } else {
-      return 0;
-    }
+    if (this.heap.length === 0) return 0;
+    if (this.heap.length === 1) return this.heap.pop();
+
+    const minValue = this.heap[0];
+    this.heap[0] = this.heap.pop();
+    this.heapifyDown();
+    return minValue;
   }
 
   heapifyUp() {
-    // 절댓값 낮은거 -> 높은거 순으로 정렬
-    // 맨 뒤에 추가됐으니 앞으로 하나씩 이동시키면서 위치 이동시키기
     let idx = this.heap.length - 1;
+
     while (idx > 0) {
-      if (Math.abs(this.heap[idx-1]) > Math.abs(this.heap[idx])) {
-        this.swap(idx - 1, idx);
-      }
-      else if (Math.abs(this.heap[idx - 1]) == Math.abs(this.heap[idx]) &&
-               this.heap[idx - 1] > this.heap[idx]) {
-        this.swap(idx - 1, idx);
-      }
-      idx--;
+      const parentIdx = Math.floor((idx - 1) / 2);
+
+      if (this.compare(this.heap[parentIdx], this.heap[idx]) > 0) {
+        this.swap(parentIdx, idx);
+        idx = parentIdx;
+      } else break;
     }
   }
 
+  heapifyDown() {
+    let idx = 0;
+    const length = this.heap.length;
+
+    while (true) {
+      const leftChildIdx = idx * 2 + 1;
+      const rightChildIdx = idx * 2 + 2;
+      let smallestIdx = idx;
+
+      if (
+        leftChildIdx < length &&
+        this.compare(this.heap[leftChildIdx], this.heap[smallestIdx]) < 0
+      ) {
+        smallestIdx = leftChildIdx;
+      }
+
+      if (
+        rightChildIdx < length &&
+        this.compare(this.heap[rightChildIdx], this.heap[smallestIdx]) < 0
+      ) {
+        smallestIdx = rightChildIdx;
+      }
+
+      if (smallestIdx !== idx) {
+        this.swap(idx, smallestIdx);
+        idx = smallestIdx;
+      } else {
+        break;
+      }
+    }
+  }
+
+  compare(a, b) {
+    const absA = Math.abs(a);
+    const absB = Math.abs(b);
+    if (absA !== absB) return absA - absB;
+    return a - b;
+  }
+
   swap(a, b) {
-    const temp = this.heap[a];
-    this.heap[a] = this.heap[b];
-    this.heap[b] = temp;
+    [this.heap[a], this.heap[b]] = [this.heap[b], this.heap[a]];
   }
 }
 
-const N = Number(input[0]);
-const T = input.slice(1).map(Number);
+const T = input.slice(1);
 const heap = new MinHeap();
+
+const result = [];
 T.forEach((x) => {
-  if (x != 0) {
+  if (x !== 0) {
     heap.add(x);
   } else {
-    // 절댓값이 가장 작은 값 출력, 그 값 배열에서 제거
-    console.log(heap.remove());
+    result.push(heap.remove());
   }
 });
+
+console.log(result.join("\n"));
