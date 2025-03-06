@@ -1,174 +1,190 @@
-const { EOF } = require("dns/promises");
-const fs = require("fs");
-const input = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
-let T = +input.shift();
+const readline = require('readline')
+const fs = require('fs')
+const rl = readline.createInterface({
+    input: process.platform === 'linux' ? process.stdin : fs.createReadStream('./input.text'),
+    output: process.stdout,
+    terminal: false,
+})
 
 class MinHeap {
-  constructor() {
-    this.q = [];
-  }
-
-  add(n) {
-    this.q.push(n);
-    this.heapifyUp();
-  }
-
-  remove() {
-    if (this.q.length === 0) return;
-    const lastIdx = this.q.length - 1;
-    this.q[0] = this.q[lastIdx];
-    this.q.pop();
-    this.heapifyDown();
-  }
-
-  heapifyUp() {
-    let index = this.q.length - 1;
-    while (true) {
-      let parentIndex = Math.floor(index / 2 - 0.1);
-      if (index === 0 || this.q[parentIndex] <= this.q[index]) break;
-      this.swap(index, parentIndex);
-      index = parentIndex;
+    constructor() {
+        this.heap = [null];
     }
-  }
 
-  heapifyDown() {
-    let index = 0;
-    let length = this.q.length;
-    while (true) {
-      let leftIdx = index * 2 + 1;
-      let rightIdx = index * 2 + 2;
-      let smallest = index;
-
-      if (leftIdx < length && this.q[leftIdx] < this.q[smallest]) {
-        smallest = leftIdx;
-      }
-      if (rightIdx < length && this.q[rightIdx] < this.q[smallest]) {
-        smallest = rightIdx;
-      }
-      if (smallest === index) break;
-
-      this.swap(index, smallest);
-      index = smallest;
+    Insert(item) {
+        let Current = this.heap.length;
+        while (Current > 1) {
+            const Parent = Math.floor(Current / 2);
+            if (this.heap[Parent] > item) {
+                this.heap[Current] = this.heap[Parent];
+                Current = Parent;
+            } else break;
+        }
+        this.heap[Current] = item;
     }
-  }
 
-  swap(a, b) {
-    [this.q[a], this.q[b]] = [this.q[b], this.q[a]];
-  }
+    Pop() {
+        if (this.heap.length > 2) {
+            const PopItem = this.heap[1];
+            this.heap[1] = this.heap.pop();
+            let Current = 1;
+            let LeftChild = Current * 2;
+            let RightChild = Current * 2 + 1;
+            while (this.heap[LeftChild]) {
+                let Compare = LeftChild;
+                if (this.heap[RightChild] && this.heap[LeftChild] > this.heap[RightChild]) {
+                    Compare = RightChild;
+                }
+                if (this.heap[Current] > this.heap[Compare]) {
+                    [this.heap[Current], this.heap[Compare]] = [this.heap[Compare], this.heap[Current]];
+                    Current = Compare;
+                    LeftChild = Current * 2;
+                    RightChild = Current * 2 + 1;
+                } else break;
+            }
+            return PopItem;
+        } else if (this.heap.length === 2) {
+            return this.heap.pop();
+        } else {
+            return null;
+        }
+    }
 
-  peek() {
-    return this.q.length ? this.q[0] : null;
-  }
+    GetLength() {
+        return this.heap.length - 1;
+    }
+
+    GetMin() {
+        return this.heap.length > 1 ? this.heap[1] : null;
+    }
+    Clear() {
+        this.heap = [null];
+    }
 }
 
 class MaxHeap {
-  constructor() {
-    this.q = [];
-  }
-
-  add(n) {
-    this.q.push(n);
-    this.heapifyUp();
-  }
-
-  remove() {
-    if (this.q.length === 0) return;
-    const lastIdx = this.q.length - 1;
-    this.q[0] = this.q[lastIdx];
-    this.q.pop();
-    this.heapifyDown();
-  }
-
-  heapifyUp() {
-    let index = this.q.length - 1;
-    while (index > 0) {
-      let parentIndex = Math.floor(index / 2 - 0.1);
-      if (this.q[parentIndex] >= this.q[index]) break;
-      this.swap(index, parentIndex);
-      index = parentIndex;
+    constructor() {
+        this.heap = [null];
     }
-  }
 
-  heapifyDown() {
-    let index = 0;
-    let length = this.q.length;
-    while (true) {
-      let leftIdx = index * 2 + 1;
-      let rightIdx = index * 2 + 2;
-      let largest = index;
-
-      if (leftIdx < length && this.q[leftIdx] > this.q[largest]) {
-        largest = leftIdx;
-      }
-      if (rightIdx < length && this.q[rightIdx] > this.q[largest]) {
-        largest = rightIdx;
-      }
-      if (largest === index) break;
-
-      this.swap(index, largest);
-      index = largest;
+    Insert(item) {
+        let Current = this.heap.length;
+        while (Current > 1) {
+            const Parent = Math.floor(Current / 2);
+            if (this.heap[Parent] < item) {
+                this.heap[Current] = this.heap[Parent];
+                Current = Parent;
+            } else break;
+        }
+        this.heap[Current] = item;
     }
-  }
 
-  swap(a, b) {
-    [this.q[a], this.q[b]] = [this.q[b], this.q[a]];
-  }
+    Pop() {
+        if (this.heap.length > 2) {
+            const PopItem = this.heap[1];
+            this.heap[1] = this.heap.pop();
+            let Current = 1;
+            let LeftChild = Current * 2;
+            let RightChild = Current * 2 + 1;
+            while (this.heap[LeftChild]) {
+                let Compare = LeftChild;
+                if (this.heap[RightChild] && this.heap[LeftChild] < this.heap[RightChild]) {
+                    Compare = RightChild;
+                }
+                if (this.heap[Current] < this.heap[Compare]) {
+                    [this.heap[Current], this.heap[Compare]] = [this.heap[Compare], this.heap[Current]];
+                    Current = Compare;
+                    LeftChild = Current * 2;
+                    RightChild = Current * 2 + 1;
+                } else break;
+            }
+            return PopItem;
+        } else if (this.heap.length === 2) {
+            return this.heap.pop();
+        } else {
+            return null;
+        }
+    }
 
-  peek() {
-    return this.q.length ? this.q[0] : null;
-  }
+    GetLength() {
+        return this.heap.length - 1;
+    }
+
+    GetMax() {
+        return this.heap.length > 1 ? this.heap[1] : null;
+    }
+
+    Clear() {
+        this.heap = [null];
+    }
 }
 
-while (T--) {
-  const K = +input.shift();
-  let minHeap = new MinHeap();
-  let maxHeap = new MaxHeap();
-  const visited = new Map();
-
-  for (let i = 0; i < K; i++) {
-    const [query, n] = input.shift().split(" ");
-    const num = Number(n);
-    if (query === "I") {
-      maxHeap.add(num);
-      minHeap.add(num);
-      visited.set(num, (visited.get(num) || 0) + 1);
+const MinPQ = new MinHeap();
+const MaxPQ = new MaxHeap();
+let index = 0;
+let EndLine = 0;
+let visited = new Map();
+let answer = [];
+rl.on('line', (line) => {
+    // 첫번쨋줄을 읽으면
+    if (index === 0) {
+        index++;
+        return;
     }
-
-    if (query === "D") {
-      if (num === 1) {
-        while (maxHeap.q.length && !visited.get(maxHeap.peek())) {
-          maxHeap.remove(); // 알고보니 걔가 minHeap에서 이미 삭제된거면..
-        }
-        if (maxHeap.q.length) {
-          let maxVal = maxHeap.peek();
-          visited.set(maxVal, visited.get(maxVal) - 1);
-          maxHeap.remove();
-        }
-      }
-      else if (num === -1) { // 최솟값 삭제
-        while (minHeap.q.length && !visited.get(minHeap.peek())) {
-          minHeap.remove(); // 알고보니 걔가 maxHeap에서 이미 삭제된거면..
-        }
-        if (minHeap.q.length) {
-          let minVal = minHeap.peek();
-          visited.set(minVal, visited.get(minVal) - 1);
-          minHeap.remove();
-        }
-      }
+    // 현재 인덱스가 더 크면, 새로운 테스트케이스라는 뜻
+    if (index > EndLine) {
+        // 새로운 테스트의 끝부분 체크.
+        EndLine = +line + index++;
+        // 변수 초기화.
+        MinPQ.Clear();
+        MaxPQ.Clear();
+        visited.clear();
+        return;
     }
-  }
+    // 명령에 따라 행동 진행. (이전의 TestStart 함수와 동일)
+    const [Order, Num] = line.split(' ')
+    if (Order === 'I') {
+        const InsertItem = parseInt(Num);
+        MinPQ.Insert(InsertItem);
+        MaxPQ.Insert(InsertItem);
+        if (visited.has(InsertItem)) {
+            visited.set(InsertItem, visited.get(InsertItem) + 1);
+        } else {
+            visited.set(InsertItem, 1);
+        }
+    } else {
+        if (Num === '1') {
+            while (MaxPQ.GetLength()) {
+                const MaxPop = MaxPQ.Pop();
+                if (visited.get(MaxPop) > 0) {
+                    visited.set(MaxPop, visited.get(MaxPop) - 1);
+                    break;
+                }
+            }
+        } else {
+            while (MinPQ.GetLength()) {
+                const MinPop = MinPQ.Pop();
+                if (visited.get(MinPop) > 0) {
+                    visited.set(MinPop, visited.get(MinPop) - 1);
+                    break;
+                }
+            }
+        }
+    }
+    if (index === EndLine) {
+        while (MaxPQ.GetLength() && visited.get(MaxPQ.GetMax()) === 0) {
+            MaxPQ.Pop();
+        }
+        let max = MaxPQ.GetMax();
+        while (MinPQ.GetLength() && visited.get(MinPQ.GetMin()) === 0) {
+            MinPQ.Pop();
+        }
+        let min = MinPQ.GetMin();
+        answer.push(max === null && min === null ? 'EMPTY' : `${max} ${min}`);
+    }
+    index++
+})
 
-  // 유효한 값만 걸러내기
-  while (minHeap.q.length && !visited.get(minHeap.peek())) {
-    minHeap.remove();
-  }
-  while (maxHeap.q.length && !visited.get(maxHeap.peek())) {
-    maxHeap.remove();
-  }
-
-  if (minHeap.q.length && maxHeap.q.length) {
-    console.log(`${maxHeap.peek()} ${minHeap.peek()}`);
-  } else {
-    console.log("EMPTY");
-  }
-}
+rl.on('close', () => {
+    console.log(answer.join('\n'))
+})
