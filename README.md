@@ -6,9 +6,11 @@
 |:--:|:--:|
 |1|알고리즘 학습|
 |2|BOJ|
-|3|CODEFORCES|
+|3|CodeUp|
 
 ___
+</br>
+
 ## 알고리즘
 
 #### 📝 노트 정리 : [AlgorithmSummary.md](https://github.com/yerang2zzang/CodingTest/blob/main/AlgorithmSummary.md)
@@ -58,23 +60,29 @@ ___
 
 ##### 참고자료 : [동빈나의 2018 알고리즘](https://blog.naver.com/ndb796)
 
-___
+
+</br>
+
+## BOJ
+
+#### 🆔 : [dpfdkvkr](https://www.acmicpc.net/user/dpfkdvkr), [solved.ac](https://solved.ac/profile/dpfkdvkr)
+
+![Solved.ac 프로필](http://mazandi.herokuapp.com/api?handle=dpfkdvkr&theme=warm)
+
+
+</br>
 
 ## CodeUp
 
 #### 🆔 : [yrpark](https://codeup.kr/userinfo.php?user=yrpark)
 
+
+<!--
 ___
-
-## BOJ
-
-#### 🆔 : [dpfdkvkr](https://www.acmicpc.net/user/dpfkdvkr), [solved.ac](https://solved.ac/profile/dpfkdvkr)
-![mazandi profile](http://mazandi.herokuapp.com/api?handle={dpfkdvkr}&theme=warm)
-
-___
-
 ## CodeForces
 
 아직 시작하지 않았습니다.
 
 #### 🆔 : [PYR](https://codeforces.com/profile/PYR)
+*/
+-->
