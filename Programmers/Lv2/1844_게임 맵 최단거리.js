@@ -7,6 +7,7 @@ function solution(maps) {
     const axisY = [0, 0, -1, 1];
     
     if (maps[N-1][M-2] === 0 && maps[N-2][M-1] === 0) {return -1}
+    visited[0][0] = true;
     q.push([0, 0, 1]);
     while (q.length > 0) {
         let [x, y, cnt] = q.shift();
