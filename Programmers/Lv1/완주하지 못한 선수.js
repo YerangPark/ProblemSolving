@@ -1,7 +1,7 @@
 function solution(participant, completion) {
     const m = new Map();
     
-    for (name of participant) {
+    for (const name of participant) {
         if (m.has(name)) {
             m.set(name, m.get(name)+1);
         }
@@ -10,13 +10,11 @@ function solution(participant, completion) {
         }
     }
     
-    for (name of completion) {
-        m.set(name,m.get(name)-1);
+    for (const name of completion) {
+        m.set(name, m.get(name)-1);
     }
     
-    for (name of participant) {
-        if (m.get(name) == 1) {
-            return name;
-        }
+    for (const [name, count] of m) {
+        if (count > 0) return name;
     }
 }
